@@ -29,7 +29,7 @@ func home() {
 	fmt.Println("WIP : Work In Progress (DELETE AFTER DONE)")
 	fmt.Println()
 	fmt.Println("1. Lihat Daftar Mobil")
-	fmt.Println("2. Cari Mobil (WIP)")
+	fmt.Println("2. Cari Mobil")
 	fmt.Println("3. Tambah Mobil Baru")
 	fmt.Println("4. Pesan Mobil untuk Pelanggan (WIP)")
 	fmt.Println("5. Laporan Penjualan (WIP)")

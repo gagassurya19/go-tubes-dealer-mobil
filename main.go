@@ -26,46 +26,10 @@ type order struct {
 	data_staff    staff
 }
 
-type arrCars [10]car
+type arrCars [100]car
 type arrCustomers [10]customer
 type arrStaffs [10]staff
 type arrOrders [10]order
-
-func dataCars(C *arrCars, n *int) {
-	*C = arrCars{
-		{1, 20000, 2020, "Toyota", "Camry"},
-		{2, 15000, 2018, "Honda", "Civic"},
-		{3, 30000, 2021, "BMW", "X5"},
-	}
-	*n = 3
-}
-
-func dataCustomers(C *arrCustomers, n *int) {
-	*C = arrCustomers{
-		{1, 123456, "John Doe", "1234567890", "123 Main St"},
-		{2, 987654, "Jane Smith", "9876543210", "456 Elm St"},
-		{3, 654321, "Michael Johnson", "6543210987", "789 Oak St"},
-	}
-	*n = 3
-}
-
-func dataStaffs(C *arrStaffs, n *int) {
-	*C = arrStaffs{
-		{1, "Emily Brown", "1234567890"},
-		{2, "James Wilson", "9876543210"},
-		{3, "Sophia Davis", "6543210987"},
-	}
-	*n = 3
-}
-
-func dataOrders(C *arrOrders, n *int, customers arrCustomers, cars arrCars, staffs arrStaffs) {
-	*C = arrOrders{
-		{1, customers[0], cars[1], staffs[0]},
-		{2, customers[1], cars[2], staffs[1]},
-		{3, customers[2], cars[0], staffs[2]},
-	}
-	*n = 3
-}
 
 func main() {
 	var cars arrCars
@@ -119,11 +83,11 @@ func main() {
 				fmt.Scanln(&opt2)
 				switch opt2 {
 				case 1:
-					carSearchByBrandInterface()
+					carSearchByBrand(cars, n_cars)
 				case 2:
-					carSearchByModelInterface()
+					carSearchByModel(cars, n_cars)
 				case 3:
-					carSearchByYearInterface()
+					carSearchByYear(cars, n_cars)
 				case 4:
 					breakLoop = true
 				default:

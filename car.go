@@ -302,33 +302,309 @@ func carSearchInterface() {
 	fmt.Println("3. Cari berdasarkan tahun")
 	fmt.Println("4. Kembali ke menu utama")
 	fmt.Println()
-	fmt.Print("Silakan masukkan nomor kriteria pencarian Anda: ")
 }
 
-func carSearchByBrandInterface() {
+func carSearchByBrand(C arrCars, n int) {
+	var brand string
+	clearScreen()
+	for {
+		fmt.Println("-------------------------------------------------")
+		fmt.Println("             CARI MOBIL BERDASARKAN MEREK")
+		fmt.Println("-------------------------------------------------")
+		fmt.Println()
+		fmt.Print("Masukkan merek mobil dicari: ")
+		fmt.Scan(&brand)
+		fmt.Println()
+		fmt.Println("Mobil yang Anda cari:")
+		fmt.Println("ID    | Merek      | Model      | Tahun | Harga")
+		fmt.Println("-------------------------------------------------")
+		for i := 0; i < n; i++ {
+			if C[i].brand == brand {
+				fmt.Printf("%-6d | %-10s | %-10s | %-5d | %d\n", C[i].id, C[i].brand, C[i].model, C[i].year, C[i].price)
+			}
+		}
+		fmt.Println()
+		fmt.Println("-------------------------------------------------")
+
+		var opt13 int
+		fmt.Println("Pilih: 1. sorting | 2. Kembali")
+		fmt.Print("Pilihan: ")
+		fmt.Scan(&opt13)
+		switch opt13 {
+		case 1:
+			for {
+				var jenis, order string
+				fmt.Print("Masukan [id/model/tahun/harga] [a/A]: ")
+				fmt.Scan(&jenis, &order)
+				fmt.Println()
+				fmt.Println("Mobil yang Anda cari:")
+				fmt.Println("ID    | Merek      | Model      | Tahun | Harga")
+				fmt.Println("-------------------------------------------------")
+
+				switch jenis {
+				case "id":
+					if order == "a" {
+						sortByIDAscending(&C, n)
+					} else {
+						sortByIDDescending(&C, n)
+					}
+				case "model":
+					if order == "a" {
+						sortByModelAscending(&C, n)
+					} else {
+						sortByModelDescending(&C, n)
+					}
+				case "tahun":
+					if order == "a" {
+						sortByYearAscending(&C, n)
+					} else {
+						sortByYearDescending(&C, n)
+					}
+				case "harga":
+					if order == "a" {
+						sortByPriceAscending(&C, n)
+					} else {
+						sortByPriceDescending(&C, n)
+					}
+				default:
+					fmt.Println("Jenis sorting tidak valid.")
+					continue
+				}
+
+				for i := 0; i < n; i++ {
+					if C[i].brand == brand {
+						fmt.Printf("%-6d | %-10s | %-10s | %-5d | %d\n", C[i].id, C[i].brand, C[i].model, C[i].year, C[i].price)
+					}
+				}
+
+				fmt.Println()
+				fmt.Println("-------------------------------------------------")
+				fmt.Println("Pilih: 1. sorting | 2. Kembali")
+				fmt.Print("Pilihan: ")
+				fmt.Scan(&opt13)
+				switch opt13 {
+				case 1:
+					continue
+				case 2:
+					return
+				default:
+					clearScreen()
+					fmt.Println("-------------------------------------------------")
+					fmt.Println("Pilihan tidak valid. Silakan coba lagi.")
+					continue
+				}
+			}
+		case 2:
+			return
+		default:
+			clearScreen()
+			fmt.Println("-------------------------------------------------")
+			fmt.Println("Pilihan tidak valid. Silakan coba lagi.")
+			continue
+		}
+	}
+}
+
+func carSearchByModel(C arrCars, n int) {
+	var model string
 	clearScreen()
 
-	fmt.Println("-------------------------------------------------")
-	fmt.Println("             CARI MOBIL BERDASARKAN MEREK")
-	fmt.Println("-------------------------------------------------")
-	fmt.Println()
-	fmt.Print("Silakan masukkan merek mobil yang Anda cari: ")
+	for {
+		fmt.Println("-------------------------------------------------")
+		fmt.Println("             CARI MOBIL BERDASARKAN MODEL")
+		fmt.Println("-------------------------------------------------")
+		fmt.Println()
+		fmt.Print("Silakan masukkan model mobil yang Anda cari: ")
+		fmt.Scan(&model)
+		fmt.Println()
+		fmt.Println("Mobil yang Anda cari:")
+		fmt.Println("ID    | Merek      | Model      | Tahun | Harga")
+		fmt.Println("-------------------------------------------------")
+		for i := 0; i < n; i++ {
+			if C[i].model == model {
+				fmt.Printf("%-6d | %-10s | %-10s | %-5d | %d\n", C[i].id, C[i].brand, C[i].model, C[i].year, C[i].price)
+			}
+		}
+		fmt.Println()
+		fmt.Println("-------------------------------------------------")
+
+		var opt13 int
+		fmt.Println("Pilih: 1. sorting | 2. Kembali")
+		fmt.Print("Pilihan: ")
+		fmt.Scan(&opt13)
+		switch opt13 {
+		case 1:
+			for {
+				var jenis, order string
+				fmt.Print("Masukan [id/merek/tahun/harga] [a/A]: ")
+				fmt.Scan(&jenis, &order)
+				fmt.Println()
+				fmt.Println("Mobil yang Anda cari:")
+				fmt.Println("ID    | Merek      | Model      | Tahun | Harga")
+				fmt.Println("-------------------------------------------------")
+
+				switch jenis {
+				case "id":
+					if order == "a" {
+						sortByIDAscending(&C, n)
+					} else {
+						sortByIDDescending(&C, n)
+					}
+				case "merek":
+					if order == "a" {
+						sortByBrandAscending(&C, n)
+					} else {
+						sortByBrandDescending(&C, n)
+					}
+				case "tahun":
+					if order == "a" {
+						sortByYearAscending(&C, n)
+					} else {
+						sortByYearDescending(&C, n)
+					}
+				case "harga":
+					if order == "a" {
+						sortByPriceAscending(&C, n)
+					} else {
+						sortByPriceDescending(&C, n)
+					}
+				default:
+					fmt.Println("Jenis sorting tidak valid.")
+					continue
+				}
+
+				for i := 0; i < n; i++ {
+					if C[i].model == model {
+						fmt.Printf("%-6d | %-10s | %-10s | %-5d | %d\n", C[i].id, C[i].brand, C[i].model, C[i].year, C[i].price)
+					}
+				}
+
+				fmt.Println()
+				fmt.Println("-------------------------------------------------")
+				fmt.Println("Pilih: 1. sorting | 2. Kembali")
+				fmt.Print("Pilihan: ")
+				fmt.Scan(&opt13)
+				switch opt13 {
+				case 1:
+					continue
+				case 2:
+					return
+				default:
+					clearScreen()
+					fmt.Println("-------------------------------------------------")
+					fmt.Println("Pilihan tidak valid. Silakan coba lagi.")
+					continue
+				}
+			}
+		case 2:
+			return
+		default:
+			clearScreen()
+			fmt.Println("-------------------------------------------------")
+			fmt.Println("Pilihan tidak valid. Silakan coba lagi.")
+			continue
+		}
+	}
 }
 
-func carSearchByModelInterface() {
+func carSearchByYear(C arrCars, n int) {
+	var year int
 	clearScreen()
 
-	fmt.Println("-------------------------------------------------")
-	fmt.Println("             CARI MOBIL BERDASARKAN MODEL")
-	fmt.Println("-------------------------------------------------")
-	fmt.Println()
-	fmt.Print("Silakan masukkan model mobil yang Anda cari: ")
-}
+	for {
+		fmt.Println("-------------------------------------------------")
+		fmt.Println("             CARI MOBIL BERDASARKAN TAHUN")
+		fmt.Println("-------------------------------------------------")
+		fmt.Println()
+		fmt.Print("Silakan masukkan tahun mobil yang Anda cari: ")
+		fmt.Scan(&year)
+		fmt.Println()
+		fmt.Println("Mobil yang Anda cari:")
+		fmt.Println("ID    | Merek      | Model      | Tahun | Harga")
+		fmt.Println("-------------------------------------------------")
+		for i := 0; i < n; i++ {
+			if C[i].year == year {
+				fmt.Printf("%-6d | %-10s | %-10s | %-5d | %d\n", C[i].id, C[i].brand, C[i].model, C[i].year, C[i].price)
+			}
+		}
+		fmt.Println()
+		fmt.Println("-------------------------------------------------")
 
-func carSearchByYearInterface() {
-	fmt.Println("-------------------------------------------------")
-	fmt.Println("             CARI MOBIL BERDASARKAN TAHUN")
-	fmt.Println("-------------------------------------------------")
-	fmt.Println()
-	fmt.Print("Silakan masukkan tahun mobil yang Anda cari: ")
+		var opt13 int
+		fmt.Println("Pilih: 1. sorting | 2. Kembali")
+		fmt.Print("Pilihan: ")
+		fmt.Scan(&opt13)
+		switch opt13 {
+		case 1:
+			for {
+				var jenis, order string
+				fmt.Print("Masukan [id/merek/model/harga] [a/A]: ")
+				fmt.Scan(&jenis, &order)
+				fmt.Println()
+				fmt.Println("Mobil yang Anda cari:")
+				fmt.Println("ID    | Merek      | Model      | Tahun | Harga")
+				fmt.Println("-------------------------------------------------")
+
+				switch jenis {
+				case "id":
+					if order == "a" {
+						sortByIDAscending(&C, n)
+					} else {
+						sortByIDDescending(&C, n)
+					}
+				case "merek":
+					if order == "a" {
+						sortByBrandAscending(&C, n)
+					} else {
+						sortByBrandDescending(&C, n)
+					}
+				case "model":
+					if order == "a" {
+						sortByModelAscending(&C, n)
+					} else {
+						sortByModelDescending(&C, n)
+					}
+				case "harga":
+					if order == "a" {
+						sortByPriceAscending(&C, n)
+					} else {
+						sortByPriceDescending(&C, n)
+					}
+				default:
+					fmt.Println("Jenis sorting tidak valid.")
+					continue
+				}
+
+				for i := 0; i < n; i++ {
+					if C[i].year == year {
+						fmt.Printf("%-6d | %-10s | %-10s | %-5d | %d\n", C[i].id, C[i].brand, C[i].model, C[i].year, C[i].price)
+					}
+				}
+
+				fmt.Println()
+				fmt.Println("-------------------------------------------------")
+				fmt.Println("Pilih: 1. sorting | 2. Kembali")
+				fmt.Print("Pilihan: ")
+				fmt.Scan(&opt13)
+				switch opt13 {
+				case 1:
+					continue
+				case 2:
+					return
+				default:
+					clearScreen()
+					fmt.Println("-------------------------------------------------")
+					fmt.Println("Pilihan tidak valid. Silakan coba lagi.")
+					continue
+				}
+			}
+		case 2:
+			return
+		default:
+			clearScreen()
+			fmt.Println("-------------------------------------------------")
+			fmt.Println("Pilihan tidak valid. Silakan coba lagi.")
+			continue
+		}
+	}
 }
