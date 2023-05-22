@@ -137,7 +137,28 @@ func main() {
 				}
 			}
 		case 3: // ADD NEW CAR
-			addNewCarInterface()
+			var opt3 int
+			for {
+				addNewCarInterface()
+				fmt.Print("Pilihan: ")
+				fmt.Scanln(&opt3)
+				switch opt3 {
+				case 1:
+					addNewCar(&cars, &n_cars)
+				case 2:
+					addBulkCar(&cars, &n_cars)
+				case 3:
+					breakLoop = true
+				default:
+					fmt.Println("Pilihan tidak valid. Silakan coba lagi.")
+					continue
+				}
+				fmt.Println()
+				if breakLoop {
+					breakLoop = false
+					break
+				}
+			}
 		case 4: // ORDER CAR
 			orderCar()
 		case 5: // SALES REPORT

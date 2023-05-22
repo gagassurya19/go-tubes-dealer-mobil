@@ -4,42 +4,6 @@ import (
 	"fmt"
 )
 
-func addCar(C *arrCars, n *int) {
-	var in car
-
-	fmt.Print("Input brand:")
-	fmt.Scanln(&in.brand)
-	fmt.Print("Input model:")
-	fmt.Scanln(&in.model)
-	fmt.Print("Input year:")
-	fmt.Scanln(&in.year)
-	fmt.Print("Input price:")
-	fmt.Scanln(&in.price)
-
-	in.id = *n
-	C[*n] = in
-
-	*n++
-}
-
-func addBulkCar(C *arrCars, n *int) {
-	var in car
-	var isBreak bool = false
-
-	fmt.Println("Input with format: [Brand] [Model] [Year] [Price] // stop")
-	for !isBreak {
-		fmt.Scanln(&in.brand, &in.model, &in.year, &in.price)
-
-		if in.brand == "stop" {
-			isBreak = true
-		} else {
-			in.id = *n
-			C[*n] = in
-			*n++
-		}
-	}
-}
-
 // CREATE NEW CAR
 func addNewCarInterface() {
 	clearScreen()
@@ -48,14 +12,105 @@ func addNewCarInterface() {
 	fmt.Println("             TAMBAH MOBIL BARU")
 	fmt.Println("-------------------------------------------------")
 	fmt.Println()
-	fmt.Println("Silakan masukkan detail mobil yang ingin ditambahkan:")
+	fmt.Println("1. Tambah satu mobil")
+	fmt.Println("2. Tambah banyak mobil (auto save)")
+	fmt.Println("3. Kembali ke menu utama")
 	fmt.Println()
-	fmt.Print("Merek: ")
-	fmt.Print("Model: ")
-	fmt.Print("Tahun: ")
-	fmt.Print("Harga: ")
+}
+
+func addNewCar(C *arrCars, n *int) {
+	var in car
+	var opt31 int
+
+	clearScreen()
+
+	for {
+		fmt.Println("-------------------------------------------------")
+		fmt.Println("         TAMBAH MOBIL BARU (SATU MOBIL)")
+		fmt.Println("-------------------------------------------------")
+		fmt.Println()
+		in.id = *n + 1 // add id (auto increment)
+		fmt.Print("Masukan merk: ")
+		fmt.Scanln(&in.brand)
+		fmt.Print("Masukan model: ")
+		fmt.Scanln(&in.model)
+		fmt.Print("Masukan year: ")
+		fmt.Scanln(&in.year)
+		fmt.Print("Masukan price: ")
+		fmt.Scanln(&in.price)
+		fmt.Println()
+		fmt.Println("-------------------------------------------------")
+		fmt.Println()
+		fmt.Println("Data mobil yang akan ditambahkan:")
+		fmt.Println("-------------------------------------------------")
+		fmt.Println("ID    | Merek      | Model      | Tahun | Harga")
+		fmt.Println("-------------------------------------------------")
+		fmt.Printf("%-6d | %-10s | %-10s | %-5d | %d\n", in.id, in.brand, in.model, in.year, in.price)
+		fmt.Println()
+		fmt.Println("-------------------------------------------------")
+		fmt.Println("Pilih: 1. Simpan | 2. Kembali")
+		fmt.Print("Pilihan: ")
+		fmt.Scan(&opt31)
+		switch opt31 {
+		case 1:
+			C[*n] = in
+			*n++
+
+			clearScreen()
+
+			fmt.Println("-------------------------------------------------")
+			fmt.Println("MOBIL BERHASIL DITAMBAHKAN!")
+			fmt.Println("-------------------------------------------------")
+			fmt.Println()
+			fmt.Println("ID    | Merek      | Model      | Tahun | Harga")
+			fmt.Println("-------------------------------------------------")
+			fmt.Printf("%-6d | %-10s | %-10s | %-5d | %d\n", in.id, in.brand, in.model, in.year, in.price)
+			fmt.Println()
+			fmt.Println("-------------------------------------------------")
+			fmt.Println("Tekan Enter untuk melanjutkan...")
+			fmt.Scanln()
+			return
+		case 2:
+			return
+		default:
+			clearScreen()
+			fmt.Println("-------------------------------------------------")
+			fmt.Println("Pilihan tidak valid. Silakan coba lagi.")
+			continue
+		}
+	}
+}
+
+func addBulkCar(C *arrCars, n *int) {
+	var in car
+	var isBreak bool = false
+
+	clearScreen()
+
+	fmt.Println("-------------------------------------------------")
+	fmt.Println("         TAMBAH MOBIL BARU (BANYAK MOBIL)")
+	fmt.Println("-------------------------------------------------")
 	fmt.Println()
-	fmt.Println("Mobil berhasil ditambahkan!")
+	fmt.Println("Masukan dengan format: [Merk] [Model] [Tahun] [Harga] // stop")
+	fmt.Println()
+
+	for !isBreak {
+		in.id = *n + 1 // add id (auto increment)
+		fmt.Scanln(&in.brand, &in.model, &in.year, &in.price)
+
+		if in.brand == "stop" {
+			isBreak = true
+			fmt.Println()
+			fmt.Println("-------------------------------------------------")
+			fmt.Println("MOBIL BERHASIL DITAMBAHKAN!")
+			fmt.Println("-------------------------------------------------")
+			fmt.Println("Tekan Enter untuk melanjutkan...")
+			fmt.Scanln()
+		} else {
+			C[*n] = in
+			*n++
+		}
+	}
 }
 
 // GET LIST OF CARS
@@ -75,7 +130,7 @@ func carListInterface(C arrCars, n int) {
 	}
 	fmt.Println()
 	fmt.Println("-------------------------------------------------")
-	fmt.Println("Pilih: 1. Edit mobil | 2. Hapus mobil | 3. Kembali ke menu utama")
+	fmt.Println("Pilih: 1. Edit | 2. Hapus | 3. Kembali ke menu utama")
 }
 
 // EDIT CAR INTERFACE
@@ -132,7 +187,7 @@ func editCarInterface(C *arrCars, n int) {
 		fmt.Printf("%-6d | %-10s | %-10s | %-5d | %d\n", editCarData.id, editCarData.brand, editCarData.model, editCarData.year, editCarData.price)
 		fmt.Println()
 		fmt.Println("-------------------------------------------------")
-		fmt.Println("Pilih: 1. Save | 2. Kembali")
+		fmt.Println("Pilih: 1. Simpan | 2. Kembali")
 		fmt.Print("Pilihan: ")
 		fmt.Scan(&opt11)
 
@@ -141,14 +196,14 @@ func editCarInterface(C *arrCars, n int) {
 			C[idx] = editCarData
 			clearScreen()
 			fmt.Println("-------------------------------------------------")
-			fmt.Println("Car successfully edited!")
+			fmt.Println("MOBIL BERHASIL DI UBAH!")
 			fmt.Println("-------------------------------------------------")
 			fmt.Println("ID    | Merek      | Model      | Tahun | Harga")
 			fmt.Println("-------------------------------------------------")
 			fmt.Printf("%-6d | %-10s | %-10s | %-5d | %d\n", editCarData.id, editCarData.brand, editCarData.model, editCarData.year, editCarData.price)
 			fmt.Println()
 			fmt.Println("-------------------------------------------------")
-			fmt.Println("Press Enter to continue...")
+			fmt.Println("Tekan Enter untuk melanjutkan...")
 			fmt.Scanln()
 			return
 		case 2:
@@ -199,7 +254,7 @@ func deleteCarInterface(C *arrCars, n *int) {
 
 		fmt.Println()
 		fmt.Println("-------------------------------------------------")
-		fmt.Println("Pilih: 1. Save | 2. Kembali")
+		fmt.Println("Pilih: 1. Simpan | 2. Kembali")
 		fmt.Print("Pilihan: ")
 		fmt.Scan(&opt12)
 
@@ -216,9 +271,9 @@ func deleteCarInterface(C *arrCars, n *int) {
 
 			clearScreen()
 			fmt.Println("-------------------------------------------------")
-			fmt.Println("Car successfully deleted!")
+			fmt.Println("MOBIL BERHASIL DI HAPUS!")
 			fmt.Println("-------------------------------------------------")
-			fmt.Println("Press Enter to continue...")
+			fmt.Println("Tekan Enter untuk melanjutkan...")
 			fmt.Scanln()
 			return
 		case 2:
