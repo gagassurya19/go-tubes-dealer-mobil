@@ -1,5 +1,17 @@
 package main
 
+import (
+	"os"
+	"os/exec"
+)
+
+// clears the screen
+func clearScreen() {
+	cmd := exec.Command("clear")
+	cmd.Stdout = os.Stdout
+	cmd.Run()
+}
+
 // Function to sort arrCars by ID in ascending order
 func sortByIDAscending(c *arrCars, n int) {
 	for i := 0; i < len(c)-1; i++ {

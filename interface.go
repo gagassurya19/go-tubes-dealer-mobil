@@ -2,17 +2,9 @@ package main
 
 import (
 	"fmt"
-	"os"
-	"os/exec"
 )
 
-func clearScreen() {
-	cmd := exec.Command("clear")
-	cmd.Stdout = os.Stdout
-	cmd.Run()
-}
-
-func home() {
+func home(namaPetugas string) {
 	clearScreen()
 
 	fmt.Println("-------------------------------------------------")
@@ -25,7 +17,7 @@ func home() {
 	fmt.Println("1. Gagas Surya Laksana (1301223164)")
 	fmt.Println("2. Yohanes Maurich Pangkey (1301220203)")
 	fmt.Println("-------------------------------------------------")
-	fmt.Println("Halo, Petugas Dealer!\nSilakan pilih salah satu opsi di bawah ini:")
+	fmt.Printf("Halo, %s! - petugas dealer\nSilakan pilih salah satu opsi di bawah ini:\n", namaPetugas)
 	fmt.Println("WIP : Work In Progress (DELETE AFTER DONE)")
 	fmt.Println()
 	fmt.Println("1. Lihat Daftar Mobil")

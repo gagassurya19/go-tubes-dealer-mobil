@@ -15,8 +15,8 @@ type customer struct {
 }
 
 type staff struct {
-	id             int
-	name, num_telp string
+	id                                 int
+	name, num_telp, username, password string
 }
 
 type order struct {
@@ -48,91 +48,88 @@ func main() {
 	fmt.Println(n_staffs)
 	fmt.Println(n_orders)
 
-	for {
-		home() // HOME INTERFACE
-		fmt.Scanln(&choice)
-		switch choice {
-		case 1: // CAR LIST
-			var opt1 int
-			for {
-				carListInterface(cars, n_cars)
-				fmt.Print("Pilihan: ")
-				fmt.Scan(&opt1)
-				switch opt1 {
-				case 1:
-					editCarInterface(&cars, n_cars)
-				case 2:
-					deleteCarInterface(&cars, &n_cars)
-				case 3:
-					breakLoop = true
-				default:
-					fmt.Println("Pilihan tidak valid. Silakan coba lagi.")
-					continue
+	isSuccess, namaPetugas := login(staffs)
+
+	for isSuccess {
+		breakLoop = false
+		for !breakLoop {
+			home(namaPetugas) // HOME INTERFACE
+			fmt.Scanln(&choice)
+			switch choice {
+			case 1: // CAR LIST
+				var opt1 int
+				var breaker bool = false
+				for !breaker {
+					carListInterface(cars, n_cars)
+					fmt.Print("Pilihan: ")
+					fmt.Scan(&opt1)
+					switch opt1 {
+					case 1:
+						editCarInterface(&cars, n_cars)
+					case 2:
+						deleteCarInterface(&cars, &n_cars)
+					case 3:
+						breaker = true
+					default:
+						fmt.Println("Pilihan tidak valid. Silakan coba lagi.")
+						continue
+					}
+					fmt.Println()
 				}
-				fmt.Println()
-				if breakLoop {
-					breakLoop = false
-					break
+			case 2: // CAR SEARCH
+				var opt2 int
+				var breaker bool = false
+				for !breaker {
+					carSearchInterface()
+					fmt.Print("Pilihan: ")
+					fmt.Scanln(&opt2)
+					switch opt2 {
+					case 1:
+						carSearchByBrand(cars, n_cars)
+					case 2:
+						carSearchByModel(cars, n_cars)
+					case 3:
+						carSearchByYear(cars, n_cars)
+					case 4:
+						breaker = true
+					default:
+						fmt.Println("Pilihan tidak valid. Silakan coba lagi.")
+						continue
+					}
+					fmt.Println()
 				}
+			case 3: // ADD NEW CAR
+				var opt3 int
+				var breaker bool = false
+				for !breaker {
+					addNewCarInterface()
+					fmt.Print("Pilihan: ")
+					fmt.Scanln(&opt3)
+					switch opt3 {
+					case 1:
+						addNewCar(&cars, &n_cars)
+					case 2:
+						addBulkCar(&cars, &n_cars)
+					case 3:
+						breaker = true
+					default:
+						fmt.Println("Pilihan tidak valid. Silakan coba lagi.")
+						continue
+					}
+					fmt.Println()
+				}
+			case 4: // ORDER CAR
+				orderCar()
+			case 5: // SALES REPORT
+				generateSalesReport()
+			case 6: // EXIT APP
+				exitApp()
+				breakLoop = true
+				isSuccess, namaPetugas = login(staffs)
+			default:
+				fmt.Println("Pilihan tidak valid. Silakan coba lagi.")
 			}
-		case 2: // CAR SEARCH
-			var opt2 int
-			for {
-				carSearchInterface()
-				fmt.Print("Pilihan: ")
-				fmt.Scanln(&opt2)
-				switch opt2 {
-				case 1:
-					carSearchByBrand(cars, n_cars)
-				case 2:
-					carSearchByModel(cars, n_cars)
-				case 3:
-					carSearchByYear(cars, n_cars)
-				case 4:
-					breakLoop = true
-				default:
-					fmt.Println("Pilihan tidak valid. Silakan coba lagi.")
-					continue
-				}
-				fmt.Println()
-				if breakLoop {
-					breakLoop = false
-					break
-				}
-			}
-		case 3: // ADD NEW CAR
-			var opt3 int
-			for {
-				addNewCarInterface()
-				fmt.Print("Pilihan: ")
-				fmt.Scanln(&opt3)
-				switch opt3 {
-				case 1:
-					addNewCar(&cars, &n_cars)
-				case 2:
-					addBulkCar(&cars, &n_cars)
-				case 3:
-					breakLoop = true
-				default:
-					fmt.Println("Pilihan tidak valid. Silakan coba lagi.")
-					continue
-				}
-				fmt.Println()
-				if breakLoop {
-					breakLoop = false
-					break
-				}
-			}
-		case 4: // ORDER CAR
-			orderCar()
-		case 5: // SALES REPORT
-			generateSalesReport()
-		case 6: // EXIT APP
-			exitApp()
-			return
-		default:
-			fmt.Println("Pilihan tidak valid. Silakan coba lagi.")
+			fmt.Println()
 		}
-		fmt.Println()
 	}
 }

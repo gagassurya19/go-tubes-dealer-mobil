@@ -47,9 +47,8 @@ func dataCustomers(C *arrCustomers, n *int) {
 
 func dataStaffs(C *arrStaffs, n *int) {
 	*C = arrStaffs{
-		{1, "Emily Brown", "1234567890"},
-		{2, "James Wilson", "9876543210"},
-		{3, "Sophia Davis", "6543210987"},
+		{1, "Gagas", "1234567890", "gagas", "123"},
+		{2, "Maurich", "9876543210", "maurich", "456"},
 	}
 	*n = 3
 }

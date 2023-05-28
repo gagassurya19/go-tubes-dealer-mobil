@@ -83,7 +83,7 @@ func addNewCar(C *arrCars, n *int) {
 
 func addBulkCar(C *arrCars, n *int) {
 	var in car
-	var isBreak bool = false
+	var breaker bool = false
 
 	clearScreen()
 
@@ -94,12 +94,12 @@ func addBulkCar(C *arrCars, n *int) {
 	fmt.Println("Masukan dengan format: [Merk] [Model] [Tahun] [Harga] // stop")
 	fmt.Println()
 
-	for !isBreak {
+	for !breaker {
 		in.id = *n + 1 // add id (auto increment)
 		fmt.Scanln(&in.brand, &in.model, &in.year, &in.price)
 
 		if in.brand == "stop" {
-			isBreak = true
+			breaker = true
 			fmt.Println()
 			fmt.Println("-------------------------------------------------")
 			fmt.Println("MOBIL BERHASIL DITAMBAHKAN!")
