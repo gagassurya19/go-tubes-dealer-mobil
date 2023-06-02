@@ -23,14 +23,16 @@ func home(namaPetugas string) {
 	fmt.Println("1. Lihat Daftar Mobil")
 	fmt.Println("2. Cari Mobil")
 	fmt.Println("3. Tambah Mobil Baru")
-	fmt.Println("4. Pesan Mobil untuk Pelanggan (WIP)")
-	fmt.Println("5. Laporan Penjualan (WIP)")
-	fmt.Println("6. Keluar ")
+	fmt.Println("4. PESAN Mobil untuk Pelanggan (WIP)")
+	fmt.Println("5. CRUD Customer")
+	fmt.Println("6. CRUD Staff")
+	fmt.Println("7. Laporan Penjualan (WIP)")
+	fmt.Println("8. Keluar ")
 	fmt.Println()
-	fmt.Print("Silakan masukkan nomor pilihan Anda: ")
+	fmt.Print("Pilihan: ")
 }
 
-func orderCar() {
+func viewOrderCar() {
 	clearScreen()
 
 	fmt.Println("-------------------------------------------------")
@@ -54,7 +56,37 @@ func orderCar() {
 	fmt.Printf("Alamat Pengiriman: Jl. Merdeka No. 1")
 }
 
-func generateSalesReport() {
+func viewCustomer() {
+	clearScreen()
+
+	fmt.Println("-------------------------------------------------")
+	fmt.Println("           LIHAT DAFTAR PELANGGAN")
+	fmt.Println("-------------------------------------------------")
+	fmt.Println()
+	fmt.Println("1. Lihat semua pelanggan")
+	fmt.Println("2. Cari pelanggan")
+	fmt.Println("3. Tambah pelanggan baru")
+	fmt.Println("4. Kembali ke menu utama")
+	fmt.Println()
+	fmt.Print("Pilihan: ")
+}
+
+func viewStaff() {
+	clearScreen()
+
+	fmt.Println("-------------------------------------------------")
+	fmt.Println("           LIHAT DAFTAR STAFF")
+	fmt.Println("-------------------------------------------------")
+	fmt.Println()
+	fmt.Println("1. Lihat semua staff")
+	fmt.Println("2. Cari staff")
+	fmt.Println("3. Tambah staff baru")
+	fmt.Println("4. Kembali ke menu utama")
+	fmt.Println()
+	fmt.Print("Pilihan: ")
+}
+
+func viewGenerateSalesReport() {
 	clearScreen()
 
 	fmt.Println("-------------------------------------------------")

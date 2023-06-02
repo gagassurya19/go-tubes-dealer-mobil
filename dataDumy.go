@@ -38,9 +38,9 @@ func dataCars(C *arrCars, n *int) {
 
 func dataCustomers(C *arrCustomers, n *int) {
 	*C = arrCustomers{
-		{1, 123456, "John Doe", "1234567890", "123 Main St"},
-		{2, 987654, "Jane Smith", "9876543210", "456 Elm St"},
-		{3, 654321, "Michael Johnson", "6543210987", "789 Oak St"},
+		{1, "Surya", "3504020001", "082139456688", "jl. raya"},
+		{2, "Yohanes", "9876543210", "082139456688", "no. 123"},
+		{3, "Laksana", "6543210987", "082139456688", "jl. 123"},
 	}
 	*n = 3
 }
@@ -49,6 +49,7 @@ func dataStaffs(C *arrStaffs, n *int) {
 	*C = arrStaffs{
 		{1, "Gagas", "1234567890", "gagas", "123"},
 		{2, "Maurich", "9876543210", "maurich", "456"},
+		{3, "1", "1", "1", "1"},
 	}
 	*n = 3
 }

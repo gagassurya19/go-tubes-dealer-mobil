@@ -10,8 +10,8 @@ type car struct {
 }
 
 type customer struct {
-	id, num_ktp             int
-	name, num_telp, address string
+	id                               int
+	name, num_ktp, num_telp, address string
 }
 
 type staff struct {
@@ -44,8 +44,6 @@ func main() {
 	dataStaffs(&staffs, &n_staffs)
 	dataOrders(&orders, &n_orders, customers, cars, staffs)
 	// TEMPORARY - DELETE AFTER DONE
-	fmt.Println(n_customers)
-	fmt.Println(n_staffs)
 	fmt.Println(n_orders)
 
 	isSuccess, namaPetugas := login(staffs)
@@ -57,13 +55,13 @@ func main() {
 			fmt.Scanln(&choice)
 			switch choice {
 			case 1: // CAR LIST
-				var opt1 int
+				var opt int
 				var breaker bool = false
 				for !breaker {
 					carListInterface(cars, n_cars)
 					fmt.Print("Pilihan: ")
-					fmt.Scan(&opt1)
-					switch opt1 {
+					fmt.Scan(&opt)
+					switch opt {
 					case 1:
 						editCarInterface(&cars, n_cars)
 					case 2:
@@ -77,13 +75,13 @@ func main() {
 					fmt.Println()
 				}
 			case 2: // CAR SEARCH
-				var opt2 int
+				var opt int
 				var breaker bool = false
 				for !breaker {
 					carSearchInterface()
 					fmt.Print("Pilihan: ")
-					fmt.Scanln(&opt2)
-					switch opt2 {
+					fmt.Scanln(&opt)
+					switch opt {
 					case 1:
 						carSearchByBrand(cars, n_cars)
 					case 2:
@@ -99,13 +97,13 @@ func main() {
 					fmt.Println()
 				}
 			case 3: // ADD NEW CAR
-				var opt3 int
+				var opt int
 				var breaker bool = false
 				for !breaker {
 					addNewCarInterface()
 					fmt.Print("Pilihan: ")
-					fmt.Scanln(&opt3)
-					switch opt3 {
+					fmt.Scanln(&opt)
+					switch opt {
 					case 1:
 						addNewCar(&cars, &n_cars)
 					case 2:
@@ -119,10 +117,68 @@ func main() {
 					fmt.Println()
 				}
 			case 4: // ORDER CAR
-				orderCar()
-			case 5: // SALES REPORT
-				generateSalesReport()
-			case 6: // EXIT APP
+				viewOrderCar()
+
+			case 5: // CRUD CUSTOMER
+				var opt int
+				var breaker bool = false
+				for !breaker {
+					viewCustomer()
+					fmt.Scanln(&opt)
+					switch opt {
+					case 1:
+						listCustomer(customers, n_customers)
+					case 2:
+						searchCustomer(&customers, &n_customers)
+					case 3:
+						addCustomer(&customers, &n_customers)
+					case 4:
+						breaker = true
+					default:
+						fmt.Println("Pilihan tidak valid. Silakan coba lagi.")
+						continue
+					}
+					fmt.Println()
+				}
+			case 6: // CRUD STAFF
+				var opt int
+				var breaker bool = false
+				for !breaker {
+					viewStaff()
+					fmt.Scanln(&opt)
+					switch opt {
+					case 1:
+						listStaff(staffs, n_staffs)
+					case 2:
+						searchStaff(&staffs, &n_staffs)
+					case 3:
+						addStaff(&staffs, &n_staffs)
+					case 4:
+						breaker = true
+					default:
+						fmt.Println("Pilihan tidak valid. Silakan coba lagi.")
+						continue
+					}
+					fmt.Println()
+				}
+			case 7: // SALES REPORT
+				var opt int
+				var breaker bool = false
+				for !breaker {
+					viewGenerateSalesReport()
+					fmt.Scanln(&opt)
+					switch opt {
+					case 1:
+						fmt.Println("hello")
+					case 2:
+						breaker = true
+					default:
+						fmt.Println("Pilihan tidak valid. Silakan coba lagi.")
+						continue
+					}
+					fmt.Println()
+				}
+			case 8: // EXIT APP
 				exitApp()
 				breakLoop = true
 				isSuccess, namaPetugas = login(staffs)
