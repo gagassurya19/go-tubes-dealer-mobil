@@ -7,7 +7,6 @@ import (
 
 func listCustomer(C arrCustomers, n int) {
 	var opt int
-
 	for {
 		clearScreen()
 		fmt.Println("-------------------------------------------------")
@@ -20,7 +19,6 @@ func listCustomer(C arrCustomers, n int) {
 		} else {
 			fmt.Println("ID | Nama                | KTP        | Telp         | Alamat")
 			fmt.Println("--------------------------------------------------------------------")
-
 			for i := 0; i < n; i++ {
 				fmt.Printf("%-3d| %-19s | %-10s | %-10s | %-10s\n", C[i].id, C[i].name, C[i].num_ktp, C[i].num_telp, C[i].address)
 			}
@@ -219,9 +217,10 @@ func addCustomer(C *arrCustomers, n *int) {
 				fmt.Scanln(&in.address)
 
 				in.id = *n + 1
-
-				C[*n] = in
+				C[in.id-1] = in
 				*n++
+				storeDataCustomers(*C, *n)
+				loadDataCustomers(C, n)
 
 				message = "**Data Berhasil Ditambahkan**"
 			}
@@ -246,7 +245,6 @@ func addCustomer(C *arrCustomers, n *int) {
 
 func editCustomer(C *arrCustomers, choosen customer, n *int) {
 	var opt int
-	var in customer
 
 	for {
 		clearScreen()
@@ -268,20 +266,16 @@ func editCustomer(C *arrCustomers, choosen customer, n *int) {
 		switch opt {
 		case 1:
 			fmt.Print("Input name:")
-			fmt.Scanln(&in.name)
-			choosen.name = in.name
+			fmt.Scanln(&choosen.name)
 		case 2:
 			fmt.Print("Input KTP number:")
-			fmt.Scanln(&in.num_ktp)
-			choosen.num_ktp = in.num_ktp
+			fmt.Scanln(&choosen.num_ktp)
 		case 3:
 			fmt.Print("Input Telphone number:")
-			fmt.Scanln(&in.num_telp)
-			choosen.num_telp = in.num_telp
+			fmt.Scanln(&choosen.num_telp)
 		case 4:
 			fmt.Print("Input address:")
-			fmt.Scanln(&in.address)
-			choosen.address = in.address
+			fmt.Scanln(&choosen.address)
 		case 5:
 			return
 		default:
@@ -290,6 +284,9 @@ func editCustomer(C *arrCustomers, choosen customer, n *int) {
 		}
 
 		C[choosen.id-1] = choosen
+
+		storeDataCustomers(*C, *n)
+		loadDataCustomers(C, n)
 	}
 }
 
@@ -305,5 +302,8 @@ func deleteCustomer(C *arrCustomers, choosen customer, n *int) {
 		}
 
 		*n--
+
+		storeDataCustomers(*C, *n)
+		loadDataCustomers(C, n)
 	}
 }

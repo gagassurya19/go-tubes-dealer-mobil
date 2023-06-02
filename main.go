@@ -43,6 +43,7 @@ func main() {
 	dataCustomers(&customers, &n_customers)
 	dataStaffs(&staffs, &n_staffs)
 	dataOrders(&orders, &n_orders, customers, cars, staffs)
+
 	// TEMPORARY - DELETE AFTER DONE
 	fmt.Println(n_orders)
 

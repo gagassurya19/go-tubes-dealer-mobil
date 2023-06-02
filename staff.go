@@ -213,8 +213,11 @@ func addStaff(C *arrStaffs, n *int) {
 			fmt.Print("Password Staff: ")
 			fmt.Scanln(&in.password)
 			in.id = *n + 1
-			C[*n] = in
+			C[in.id-1] = in
 			*n++
+
+			storeDataStaffs(*C, *n)
+			loadDataStaffs(C, n)
 		case 2:
 			return
 		default:
@@ -226,7 +229,6 @@ func addStaff(C *arrStaffs, n *int) {
 
 func editStaff(C *arrStaffs, choosenStaff staff, n *int) {
 	var opt int
-	var in staff
 
 	for {
 		clearScreen()
@@ -247,27 +249,25 @@ func editStaff(C *arrStaffs, choosenStaff staff, n *int) {
 		switch opt {
 		case 1:
 			fmt.Print("Masukkan nama baru: ")
-			fmt.Scanln(&in.name)
-			choosenStaff.name = in.name
+			fmt.Scanln(&choosenStaff.name)
 		case 2:
 			fmt.Print("Masukkan telp baru: ")
-			fmt.Scanln(&in.num_telp)
-			choosenStaff.num_telp = in.num_telp
+			fmt.Scanln(&choosenStaff.num_telp)
 		case 3:
 			fmt.Print("Masukkan username baru: ")
-			fmt.Scanln(&in.username)
-			choosenStaff.username = in.username
+			fmt.Scanln(&choosenStaff.username)
 		case 4:
 			fmt.Print("Masukkan password baru: ")
-			fmt.Scanln(&in.password)
-			choosenStaff.password = in.password
+			fmt.Scanln(&choosenStaff.password)
 		case 5:
 			return
 		default:
 			fmt.Println("**Pilihan tidak valid. Silakan coba lagi.**")
 			continue
 		}
-		C[choosenStaff.id-1] = in
+		C[choosenStaff.id-1] = choosenStaff
+		storeDataStaffs(*C, *n)
+		loadDataStaffs(C, n)
 	}
 }
 
@@ -283,5 +283,7 @@ func deleteStaff(C *arrStaffs, choosen staff, n *int) {
 		}
 
 		*n--
+		storeDataStaffs(*C, *n)
+		loadDataStaffs(C, n)
 	}
 }

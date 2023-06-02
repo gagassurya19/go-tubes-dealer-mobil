@@ -55,6 +55,8 @@ func addNewCar(C *arrCars, n *int) {
 		case 1:
 			C[*n] = in
 			*n++
+			storeDataCars(*C, *n)
+			loadDataCars(C, n)
 
 			clearScreen()
 
@@ -109,6 +111,8 @@ func addBulkCar(C *arrCars, n *int) {
 		} else {
 			C[*n] = in
 			*n++
+			storeDataCars(*C, *n)
+			loadDataCars(C, n)
 		}
 	}
 }
@@ -194,6 +198,9 @@ func editCarInterface(C *arrCars, n int) {
 		switch opt11 {
 		case 1:
 			C[idx] = editCarData
+			storeDataCars(*C, n)
+			loadDataCars(C, &n)
+
 			clearScreen()
 			fmt.Println("-------------------------------------------------")
 			fmt.Println("MOBIL BERHASIL DI UBAH!")
@@ -268,6 +275,9 @@ func deleteCarInterface(C *arrCars, n *int) {
 			C[*n-1] = car{}
 
 			*n--
+
+			storeDataCars(*C, *n)
+			loadDataCars(C, n)
 
 			clearScreen()
 			fmt.Println("-------------------------------------------------")
