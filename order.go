@@ -2,12 +2,13 @@ package main
 
 import (
 	"fmt"
+	"strconv"
 	"time"
 )
 
 func placeOrder(O *arrOrders, n *int, cars arrCars, n_car int, customers arrCustomers, n_customer int, staff staff, staffs arrStaffs) {
 	var foundCar, foundCustomer, found bool = false, false, false
-	var id_car, id_customer int
+	var id_car_input, id_customer_input string
 	var message string
 
 	var carChoosen car
@@ -25,8 +26,18 @@ func placeOrder(O *arrOrders, n *int, cars arrCars, n_car int, customers arrCust
 		fmt.Println()
 
 		if !foundCar {
-			fmt.Printf("ID Mobil (1 - %d): ", n_car-1)
-			fmt.Scanln(&id_car)
+			fmt.Printf("ID Mobil (1 - %d) | ` (exit): ", n_car-1)
+			fmt.Scanln(&id_car_input)
+
+			if id_car_input == "`" {
+				return
+			}
+
+			id_car, err := strconv.Atoi(id_car_input)
+			if err != nil {
+				fmt.Println("Error:", err)
+				return
+			}
 
 			if id_car < 0 || id_car >= n_car {
 				message = "ID Mobil tidak valid. Silakan coba lagi."
@@ -62,8 +73,18 @@ func placeOrder(O *arrOrders, n *int, cars arrCars, n_car int, customers arrCust
 		}
 
 		if foundCar && !foundCustomer {
-			fmt.Printf("ID Customer (1 - %d): ", n_customer-1)
-			fmt.Scanln(&id_customer)
+			fmt.Printf("ID Customer (1 - %d) | ` (exit): ", n_customer-1)
+			fmt.Scanln(&id_customer_input)
+
+			if id_customer_input == "`" {
+				return
+			}
+
+			id_customer, err := strconv.Atoi(id_car_input)
+			if err != nil {
+				fmt.Println("Error:", err)
+				return
+			}
 
 			if id_customer < 0 || id_customer >= n_customer {
 				message = "ID Customer tidak valid. Silakan coba lagi."
