@@ -21,6 +21,11 @@ type staff struct {
 
 type order struct {
 	id            int
+	tax           int
+	subtotal      int
+	total         int
+	invoice       string
+	date          string
 	data_customer customer
 	data_car      car
 	data_staff    staff
@@ -38,21 +43,20 @@ func main() {
 	var orders arrOrders
 	var choice, n_cars, n_customers, n_staffs, n_orders int
 	var breakLoop bool = false
+
 	// DATA DUMMY DEFAULT
 	dataCars(&cars, &n_cars)
 	dataCustomers(&customers, &n_customers)
 	dataStaffs(&staffs, &n_staffs)
 	dataOrders(&orders, &n_orders, customers, cars, staffs)
 
-	// TEMPORARY - DELETE AFTER DONE
-	fmt.Println(n_orders)
-
-	isSuccess, namaPetugas := login(staffs)
+	// LOGIN INTERFACE
+	isSuccess, dataStaff := login(staffs)
 
 	for isSuccess {
 		breakLoop = false
 		for !breakLoop {
-			home(namaPetugas) // HOME INTERFACE
+			home(dataStaff.name) // HOME INTERFACE
 			fmt.Scanln(&choice)
 			switch choice {
 			case 1: // CAR LIST
@@ -118,7 +122,10 @@ func main() {
 					fmt.Println()
 				}
 			case 4: // ORDER CAR
-				viewOrderCar()
+				// viewOrderCar()
+
+				fmt.Println(n_orders)
+				placeOrder(&orders, &n_orders, cars, n_cars, customers, n_customers, dataStaff, staffs)
 
 			case 5: // CRUD CUSTOMER
 				var opt int
@@ -182,7 +189,7 @@ func main() {
 			case 8: // EXIT APP
 				exitApp()
 				breakLoop = true
-				isSuccess, namaPetugas = login(staffs)
+				isSuccess, dataStaff = login(staffs)
 			default:
 				fmt.Println("Pilihan tidak valid. Silakan coba lagi.")
 			}

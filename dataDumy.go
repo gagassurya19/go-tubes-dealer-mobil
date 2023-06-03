@@ -33,7 +33,6 @@ func dataCustomers(C *arrCustomers, n *int) {
 
 	storeDataCustomers(*C, *n)
 	loadDataCustomers(C, n)
-	fmt.Println(*n)
 }
 
 func dataStaffs(C *arrStaffs, n *int) {
@@ -50,9 +49,39 @@ func dataStaffs(C *arrStaffs, n *int) {
 
 func dataOrders(C *arrOrders, n *int, customers arrCustomers, cars arrCars, staffs arrStaffs) {
 	*C = arrOrders{
-		{1, customers[0], cars[1], staffs[0]},
-		{2, customers[1], cars[2], staffs[1]},
-		{3, customers[2], cars[0], staffs[2]},
+		{
+			id:            1,
+			tax:           10,
+			subtotal:      20000,
+			total:         22000,
+			invoice:       "INV-001",
+			date:          "2023-06-02",
+			data_customer: customers[0],
+			data_car:      cars[1],
+			data_staff:    staffs[0],
+		},
+		{
+			id:            2,
+			tax:           10,
+			subtotal:      30000,
+			total:         33000,
+			invoice:       "INV-002",
+			date:          "2023-06-03",
+			data_customer: customers[1],
+			data_car:      cars[2],
+			data_staff:    staffs[1],
+		},
+		{
+			id:            3,
+			tax:           10,
+			subtotal:      25000,
+			total:         27500,
+			invoice:       "INV-003",
+			date:          "2023-06-04",
+			data_customer: customers[2],
+			data_car:      cars[0],
+			data_staff:    staffs[2],
+		},
 	}
 	*n = 3
 
@@ -64,7 +93,7 @@ func dataOrders(C *arrOrders, n *int, customers arrCustomers, cars arrCars, staf
 func storeDataCars(C arrCars, n int) {
 	// Check if there is no data in the array
 	if n == 0 || n == 3 {
-		fmt.Println("No data to store")
+		fmt.Println("STORE CAR: No data to store")
 		return
 	}
 
@@ -72,7 +101,7 @@ func storeDataCars(C arrCars, n int) {
 	if _, err := os.Stat(databaseFolder); os.IsNotExist(err) {
 		err := os.Mkdir(databaseFolder, 0755)
 		if err != nil {
-			fmt.Println("Error creating database folder:", err)
+			fmt.Println("STORE CAR: Error creating database folder:", err)
 			return
 		}
 	}
@@ -81,7 +110,7 @@ func storeDataCars(C arrCars, n int) {
 
 	file, err := os.Create(filePath)
 	if err != nil {
-		fmt.Println("Error:", err)
+		fmt.Println("STORE CAR: Error:", err)
 		return
 	}
 	defer file.Close()
@@ -94,7 +123,7 @@ func storeDataCars(C arrCars, n int) {
 func storeDataCustomers(C arrCustomers, n int) {
 	// Check if there is no data in the array
 	if n == 0 || n == 3 {
-		fmt.Println("No data to store")
+		fmt.Println("STORE CUSTOMER: No data to store")
 		return
 	}
 
@@ -102,7 +131,7 @@ func storeDataCustomers(C arrCustomers, n int) {
 	if _, err := os.Stat(databaseFolder); os.IsNotExist(err) {
 		err := os.Mkdir(databaseFolder, 0755)
 		if err != nil {
-			fmt.Println("Error creating database folder:", err)
+			fmt.Println("STORE CUSTOMER: Error creating database folder:", err)
 			return
 		}
 	}
@@ -110,7 +139,7 @@ func storeDataCustomers(C arrCustomers, n int) {
 	filePath := filepath.Join(databaseFolder, "dataCustomers.txt")
 	file, err := os.Create(filePath)
 	if err != nil {
-		fmt.Println("Error:", err)
+		fmt.Println("STORE CUSTOMER: Error:", err)
 		return
 	}
 	defer file.Close()
@@ -122,7 +151,7 @@ func storeDataCustomers(C arrCustomers, n int) {
 func storeDataStaffs(C arrStaffs, n int) {
 	// Check if there is no data in the array
 	if n == 0 || n == 3 {
-		fmt.Println("No data to store")
+		fmt.Println("STORE STAFF: No data to store")
 		return
 	}
 
@@ -130,7 +159,7 @@ func storeDataStaffs(C arrStaffs, n int) {
 	if _, err := os.Stat(databaseFolder); os.IsNotExist(err) {
 		err := os.Mkdir(databaseFolder, 0755)
 		if err != nil {
-			fmt.Println("Error creating database folder:", err)
+			fmt.Println("STORE STAFF: Error creating database folder:", err)
 			return
 		}
 	}
@@ -138,7 +167,7 @@ func storeDataStaffs(C arrStaffs, n int) {
 	filePath := filepath.Join(databaseFolder, "dataStaffs.txt")
 	file, err := os.Create(filePath)
 	if err != nil {
-		fmt.Println("Error: ", err)
+		fmt.Println("STORE STAFF: Error: ", err)
 		return
 	}
 	defer file.Close()
@@ -150,7 +179,7 @@ func storeDataStaffs(C arrStaffs, n int) {
 func storeDataOrders(O arrOrders, n int, C arrCustomers, Car arrCars, S arrStaffs) {
 	// Check if there is no data in the array
 	if n == 0 || n == 3 {
-		fmt.Println("No data to store")
+		fmt.Println("STORE ORDERS: No data to store")
 		return
 	}
 
@@ -158,7 +187,7 @@ func storeDataOrders(O arrOrders, n int, C arrCustomers, Car arrCars, S arrStaff
 	if _, err := os.Stat(databaseFolder); os.IsNotExist(err) {
 		err := os.Mkdir(databaseFolder, 0755)
 		if err != nil {
-			fmt.Println("Error creating database folder:", err)
+			fmt.Println("STORE ORDERS: Error creating database folder:", err)
 			return
 		}
 	}
@@ -166,12 +195,44 @@ func storeDataOrders(O arrOrders, n int, C arrCustomers, Car arrCars, S arrStaff
 	filePath := filepath.Join(databaseFolder, "dataOrders.txt")
 	file, err := os.Create(filePath)
 	if err != nil {
-		fmt.Println("Error: ", err)
+		fmt.Println("STORE ORDERS: Error: ", err)
 		return
 	}
 	defer file.Close()
 	for i := 0; i < n; i++ {
-		fmt.Fprintln(file, O[i].id, C[i], Car[i], S[i])
+		order := O[i]
+		customer := order.data_customer
+		car := order.data_car
+		staff := order.data_staff
+
+		// Format the order data into a string
+		orderData := fmt.Sprintf("%d_%d_%d_%d_%s_%s,%d_%s_%s_%s,%d_%s_%s_%d_%d,%d_%s_%s_%s\n",
+			order.id,
+			order.tax,
+			order.subtotal,
+			order.total,
+			order.date,
+			order.invoice,
+			customer.id,
+			customer.name,
+			customer.num_ktp,
+			customer.num_telp,
+			car.id,
+			car.brand,
+			car.model,
+			car.year,
+			car.price,
+			staff.id,
+			staff.name,
+			staff.num_telp,
+			staff.username)
+
+		// Write the order data to the file
+		_, err := file.WriteString(orderData)
+		if err != nil {
+			fmt.Println("STORE ORDERS: Error writing order data:", err)
+			return
+		}
 	}
 }
 
@@ -179,7 +240,7 @@ func storeDataOrders(O arrOrders, n int, C arrCustomers, Car arrCars, S arrStaff
 func loadDataCars(C *arrCars, n *int) {
 	file, err := os.Open("./database/dataCars.txt")
 	if err != nil {
-		fmt.Println("Error:", err)
+		fmt.Println("LOAD CAR: Error:", err)
 		return
 	}
 	defer file.Close()
@@ -216,7 +277,7 @@ func loadDataCars(C *arrCars, n *int) {
 func loadDataCustomers(C *arrCustomers, n *int) {
 	file, err := os.Open("./database/dataCustomers.txt")
 	if err != nil {
-		fmt.Println("Error:", err)
+		fmt.Println("LOAD CUSTOMER: Error:", err)
 		return
 	}
 	defer file.Close()
@@ -253,7 +314,7 @@ func loadDataCustomers(C *arrCustomers, n *int) {
 func loadDataStaffs(C *arrStaffs, n *int) {
 	file, err := os.Open("./database/dataStaffs.txt")
 	if err != nil {
-		fmt.Println("Error:", err)
+		fmt.Println("LOAD STAFF: Error:", err)
 		return
 	}
 	defer file.Close()
@@ -287,31 +348,61 @@ func loadDataStaffs(C *arrStaffs, n *int) {
 	*n = i
 }
 
-func loadDataOrders(O *arrOrders, n *int, C arrCustomers, Car arrCars, S arrStaffs) {
+func loadDataOrders(O *arrOrders, n *int, customers arrCustomers, cars arrCars, staffs arrStaffs) {
 	file, err := os.Open("./database/dataOrders.txt")
 	if err != nil {
-		fmt.Println("Error:", err)
+		fmt.Println("LOAD ORDER: Error:", err)
 		return
 	}
 	defer file.Close()
 
 	scanner := bufio.NewScanner(file)
 	i := 0
+
 	for scanner.Scan() && i < len(O) {
 		line := scanner.Text()
-		fields := strings.Split(line, " ")
+
+		// Extract the fields from the line
+		fields := strings.Split(line, ",")
 		if len(fields) != 4 {
 			continue
 		}
 
-		id, _ := strconv.Atoi(fields[0])
-		customerID, _ := strconv.Atoi(fields[1])
-		carID, _ := strconv.Atoi(fields[2])
-		staffID, _ := strconv.Atoi(fields[3])
+		orderFields := strings.Split(fields[0], "_")
+		if len(orderFields) != 6 {
+			continue
+		}
+		id, _ := strconv.Atoi(orderFields[0])
+		orderTax, _ := strconv.Atoi(orderFields[1])
+		orderSubtotal, _ := strconv.Atoi(orderFields[2])
+		orderTotal, _ := strconv.Atoi(orderFields[3])
+		orderDate := orderFields[4]
+		orderInvoice := orderFields[5]
+
+		// Extract the customer data from the line
+		customerFields := strings.Split(fields[1], "_")
+		if len(customerFields) != 4 {
+			continue
+		}
+		customerID, _ := strconv.Atoi(customerFields[0])
+
+		// Extract the car data from the line
+		carFields := strings.Split(fields[2], "_")
+		if len(carFields) != 5 {
+			continue
+		}
+		carID, _ := strconv.Atoi(carFields[0])
+
+		// Extract the staff data from the line
+		staffFields := strings.Split(fields[3], "_")
+		if len(staffFields) != 4 {
+			continue
+		}
+		staffID, _ := strconv.Atoi(staffFields[0])
 
 		// Find the corresponding customer, car, and staff objects based on their IDs
 		var customer customer
-		for _, c := range C {
+		for _, c := range customers {
 			if c.id == customerID {
 				customer = c
 				break
@@ -319,7 +410,7 @@ func loadDataOrders(O *arrOrders, n *int, C arrCustomers, Car arrCars, S arrStaf
 		}
 
 		var car car
-		for _, c := range Car {
+		for _, c := range cars {
 			if c.id == carID {
 				car = c
 				break
@@ -327,7 +418,7 @@ func loadDataOrders(O *arrOrders, n *int, C arrCustomers, Car arrCars, S arrStaf
 		}
 
 		var staff staff
-		for _, s := range S {
+		for _, s := range staffs {
 			if s.id == staffID {
 				staff = s
 				break
@@ -337,6 +428,11 @@ func loadDataOrders(O *arrOrders, n *int, C arrCustomers, Car arrCars, S arrStaf
 		// Create the order object and assign the customer, car, and staff references
 		o := order{
 			id:            id,
+			tax:           orderTax,
+			subtotal:      orderSubtotal,
+			total:         orderTotal,
+			date:          orderDate,
+			invoice:       orderInvoice,
 			data_customer: customer,
 			data_car:      car,
 			data_staff:    staff,
@@ -345,5 +441,6 @@ func loadDataOrders(O *arrOrders, n *int, C arrCustomers, Car arrCars, S arrStaf
 		O[i] = o
 		i++
 	}
+
 	*n = i
 }

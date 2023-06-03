@@ -32,30 +32,6 @@ func home(namaPetugas string) {
 	fmt.Print("Pilihan: ")
 }
 
-func viewOrderCar() {
-	clearScreen()
-
-	fmt.Println("-------------------------------------------------")
-	fmt.Println("           PESAN MOBIL UNTUK PELANGGAN")
-	fmt.Println("-------------------------------------------------")
-	fmt.Println()
-	fmt.Println("Silakan masukkan detail pemesanan:")
-	fmt.Println()
-	fmt.Print("ID Mobil: ")
-	fmt.Print("ID Mobil: ")
-	fmt.Print("Nama Pelanggan: ")
-	fmt.Print("Alamat Pengiriman: ")
-
-	fmt.Println()
-	fmt.Println("Pesanan berhasil dibuat:")
-	fmt.Println()
-	fmt.Printf("ID Mobil: 1")
-	fmt.Printf("Merek: Toyota")
-	fmt.Printf("Model: Avanza")
-	fmt.Printf("Nama Pelanggan: Budi")
-	fmt.Printf("Alamat Pengiriman: Jl. Merdeka No. 1")
-}
-
 func viewCustomer() {
 	clearScreen()
 
