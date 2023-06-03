@@ -23,12 +23,3 @@
 23_22000_2020_toyota_rav4
 24_24000_2018_honda_civic
 25_23000_2018_honda_accord
-26_21000_2018_honda_cr-v
-27_30000_2021_bmw_x5
-28_32000_2021_bmw_3-series
-29_28000_2021_bmw_5-series
-30_25000_2019_ford_mustang
-31_27000_2019_ford_f-150
-32_123_123_qwe_qwe
-33_123_123_qwe_qwe
-34_312_312_qwe_qwe
