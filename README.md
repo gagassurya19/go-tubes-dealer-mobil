@@ -1,3 +1,5 @@
+![Home](https://github.com/gagassurya19/go-tubes-dealer-mobil/blob/main/docs/image/home.png)
+
 # Go-Tubes-Dealer-Mobil
 
 Go-Tubes-Dealer-Mobil is a project created using the Go programming language and serves as a simple car dealer application. This project aims to help manage car, customer, and transaction data in a car dealer.
