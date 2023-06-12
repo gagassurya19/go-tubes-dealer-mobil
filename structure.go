@@ -3,6 +3,7 @@ package main
 type car struct {
 	id, price, year int
 	brand, model    string
+	totalTerjual    int
 }
 
 type customer struct {
@@ -27,7 +28,13 @@ type order struct {
 	data_staff    staff
 }
 
-type arrCars [100]car
-type arrCustomers [10]customer
-type arrStaffs [10]staff
-type arrOrders [10]order
+const MAXCARS = 100
+const MAXCUSTOMERS = 10
+const MAXSTAFFS = 10
+const MAXORDERS = 100
+const MAXTOPS = 3
+
+type arrCars [MAXCARS]car
+type arrCustomers [MAXCUSTOMERS]customer
+type arrStaffs [MAXSTAFFS]staff
+type arrOrders [MAXORDERS]order

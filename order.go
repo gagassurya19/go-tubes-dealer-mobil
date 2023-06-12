@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-func placeOrder(O *arrOrders, n *int, cars arrCars, n_car int, customers arrCustomers, n_customer int, staff staff, staffs arrStaffs) {
+func placeOrder(O *arrOrders, n *int, cars *arrCars, n_car int, customers arrCustomers, n_customer int, staff staff, staffs arrStaffs) {
 	var foundCar, foundCustomer, found bool = false, false, false
 	var id_car_input, id_customer_input string
 	var message string
@@ -44,7 +44,7 @@ func placeOrder(O *arrOrders, n *int, cars arrCars, n_car int, customers arrCust
 				continue
 			}
 
-			carFound, carData := searchCar(cars, n_car, id_car)
+			carFound, carData := searchCar(*cars, n_car, id_car)
 			if carFound {
 				fmt.Println("ID  | Merek    | Model    | Tahun    | Harga")
 				fmt.Println("-------------------------------------------------")
@@ -80,7 +80,7 @@ func placeOrder(O *arrOrders, n *int, cars arrCars, n_car int, customers arrCust
 				return
 			}
 
-			id_customer, err := strconv.Atoi(id_car_input)
+			id_customer, err := strconv.Atoi(id_customer_input)
 			if err != nil {
 				fmt.Println("Error:", err)
 				return
@@ -132,9 +132,17 @@ func placeOrder(O *arrOrders, n *int, cars arrCars, n_car int, customers arrCust
 		}
 	}
 
-	postToDatabase(O, n, carChoosen, customerChoosen, staff)
-	storeDataOrders(*O, *n, customers, cars, staffs)
-	loadDataOrders(O, n, customers, cars, staffs)
+	postToDatabase(O, n, cars, n_car, carChoosen, customerChoosen, staff)
+
+	storeDataOrders(*O, *n, customers, *cars, staffs)
+	loadDataOrders(O, n, customers, *cars, staffs)
+
+	fmt.Println(cars)
+
+	storeDataCars(*cars, n_car)
+	loadDataCars(cars, &n_car)
+
+	fmt.Println(cars)
 
 	clearScreen()
 	invoiceNumber := O[*n-1].invoice
@@ -144,11 +152,18 @@ func placeOrder(O *arrOrders, n *int, cars arrCars, n_car int, customers arrCust
 	fmt.Scanln()
 }
 
-func postToDatabase(O *arrOrders, n *int, carChoosen car, customerChoosen customer, staff staff) {
+func postToDatabase(O *arrOrders, n *int, carList *arrCars, n_car int, carChoosen car, customerChoosen customer, staff staff) {
 	// Generate invoice number
 	invoiceNumber := generateInvoiceNumber()
 	// Get current date
 	date := time.Now().Format("2006-01-02")
+
+	// Update the car data total terjual
+	for i := 0; i < n_car; i++ {
+		if carList[i].id == carChoosen.id {
+			carList[i].totalTerjual++
+		}
+	}
 
 	// Create the order and add it to the array
 	O[*n] = order{

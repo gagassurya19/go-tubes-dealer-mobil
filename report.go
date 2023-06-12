@@ -58,3 +58,52 @@ func findHistoryOrder(O arrOrders, n int) {
 		fmt.Scanln()
 	}
 }
+
+func generateTopThree(C arrCars, n int) {
+	if n == 0 {
+		fmt.Println("Belum ada riwayat pemesanan.")
+	} else {
+		var topList [MAXCARS]car
+		var n_topList int
+		for i := 0; i < n; i++ {
+			if C[i].totalTerjual > 0 {
+				topList[n_topList] = C[i]
+				n_topList++
+			}
+		}
+
+		fmt.Println("tess")
+
+		// Sorting by totalTerjual
+		for i := 0; i < n_topList; i++ {
+			for j := i + 1; j < n_topList; j++ {
+				if topList[i].totalTerjual < topList[j].totalTerjual {
+					temp := topList[i]
+					topList[i] = topList[j]
+					topList[j] = temp
+				}
+			}
+		}
+
+		clearScreen()
+		fmt.Println("-----------------------------------------------------------")
+		fmt.Println("           LAPORAN PENJUALAN DEALER")
+		fmt.Println("-----------------------------------------------------------")
+		fmt.Printf("Top %d mobil terlaris:\n", MAXTOPS)
+		fmt.Println("-----------------------------------------------------------")
+		fmt.Println("No. | Merek      | Tipe       | Tahun | Qty | Total Omset")
+		fmt.Println("-----------------------------------------------------------")
+		for i := 0; i < MAXTOPS; i++ {
+			fmt.Printf("%-3d | %-10s | %-10s | %-5d | %-3d | %-5d\n",
+				i+1,
+				topList[i].brand,
+				topList[i].model,
+				topList[i].year,
+				topList[i].totalTerjual,
+				topList[i].totalTerjual*topList[i].price)
+		}
+		fmt.Println("-----------------------------------------------------------")
+	}
+	fmt.Println("Tekan ENTER untuk kembali...")
+	fmt.Scanln()
+}

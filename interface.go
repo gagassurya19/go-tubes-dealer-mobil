@@ -68,9 +68,10 @@ func viewGenerateSalesReport() {
 	fmt.Println("           LAPORAN PENJUALAN DEALER")
 	fmt.Println("-------------------------------------------------")
 	fmt.Println()
-	fmt.Println("1. Lihat history penjualan")
-	fmt.Println("2. Cari history penjualan")
-	fmt.Println("3. Kembali ke menu utama")
+	fmt.Println("1. Top 3 mobil terlaris")
+	fmt.Println("2. Lihat history penjualan")
+	fmt.Println("3. Cari history penjualan")
+	fmt.Println("4. Kembali ke menu utama")
 	fmt.Println()
 	fmt.Print("Pilihan: ")
 }

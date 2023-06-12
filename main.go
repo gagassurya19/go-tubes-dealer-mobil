@@ -90,7 +90,7 @@ func main() {
 					fmt.Println()
 				}
 			case 4: // ORDER CAR
-				placeOrder(&orders, &n_orders, cars, n_cars, customers, n_customers, dataStaff, staffs)
+				placeOrder(&orders, &n_orders, &cars, n_cars, customers, n_customers, dataStaff, staffs)
 			case 5: // CRUD CUSTOMER
 				var opt int
 				var breaker bool = false
@@ -141,10 +141,12 @@ func main() {
 					fmt.Scanln(&opt)
 					switch opt {
 					case 1:
-						viewHistoryOrders(orders, n_orders)
+						generateTopThree(cars, n_cars)
 					case 2:
-						findHistoryOrder(orders, n_orders)
+						viewHistoryOrders(orders, n_orders)
 					case 3:
+						findHistoryOrder(orders, n_orders)
+					case 4:
 						breaker = true
 					default:
 						fmt.Println("Pilihan tidak valid. Silakan coba lagi.")

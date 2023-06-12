@@ -13,14 +13,15 @@ const databaseFolder = "./database"
 
 func dataCars(C *arrCars, n *int) {
 	*C = arrCars{
-		{1, 20000, 2020, "toyota", "camry"},
-		{2, 15000, 2018, "honda", "civic"},
-		{3, 30000, 2021, "bmw", "x5"},
+		{1, 20000, 2020, "toyota", "camry", 1},
+		{2, 15000, 2018, "honda", "civic", 1},
+		{3, 30000, 2021, "bmw", "x5", 1},
 	}
 	*n = 3
 
 	storeDataCars(*C, *n)
 	loadDataCars(C, n)
+	fmt.Println(C)
 }
 
 func dataCustomers(C *arrCustomers, n *int) {
@@ -116,7 +117,7 @@ func storeDataCars(C arrCars, n int) {
 	defer file.Close()
 
 	for i := 0; i < n; i++ {
-		fmt.Fprintf(file, "%d_%d_%d_%s_%s\n", C[i].id, C[i].price, C[i].year, C[i].brand, C[i].model)
+		fmt.Fprintf(file, "%d_%d_%d_%s_%s_%d\n", C[i].id, C[i].price, C[i].year, C[i].brand, C[i].model, C[i].totalTerjual)
 	}
 }
 
@@ -250,7 +251,7 @@ func loadDataCars(C *arrCars, n *int) {
 	for scanner.Scan() && i < len(C) {
 		line := scanner.Text()
 		fields := strings.Split(line, "_")
-		if len(fields) != 5 {
+		if len(fields) != 6 {
 			continue
 		}
 
@@ -259,13 +260,15 @@ func loadDataCars(C *arrCars, n *int) {
 		year, _ := strconv.Atoi(fields[2])
 		brand := fields[3]
 		model := fields[4]
+		totalTerjual, _ := strconv.Atoi(fields[5])
 
 		c := car{
-			id:    id,
-			price: price,
-			year:  year,
-			brand: brand,
-			model: model,
+			id:           id,
+			price:        price,
+			year:         year,
+			brand:        brand,
+			model:        model,
+			totalTerjual: totalTerjual,
 		}
 
 		C[i] = c
