@@ -11,11 +11,11 @@ func home(namaPetugas string) {
 	fmt.Println("        TUGAS BESAR ALGORITMA DAN PEMROGRAMAN")
 	fmt.Println("                      IF-46-10")
 	fmt.Println("-------------------------------------------------")
-	fmt.Println("           SELAMAT DATANG DI DEALER MOBIL")
+	fmt.Println("        🚘 SELAMAT DATANG DI DEALER MOBIL 🚘")
 	fmt.Println("-------------------------------------------------")
 	fmt.Println("Kelompok:")
-	fmt.Println("1. Gagas Surya Laksana (1301223164)")
-	fmt.Println("2. Yohanes Maurich Pangkey (1301220203)")
+	fmt.Println("1️⃣  Gagas Surya Laksana (1301223164)")
+	fmt.Println("2️⃣  Yohanes Maurich Pangkey (1301220203)")
 	fmt.Println("-------------------------------------------------")
 	fmt.Printf("Halo, %s! - petugas dealer\nSilakan pilih salah satu opsi di bawah ini:\n", namaPetugas)
 	fmt.Println()
@@ -27,7 +27,7 @@ func home(namaPetugas string) {
 	fmt.Println("6. CRUD STAFF")
 	fmt.Println("7. LAPORAN PENJUALAN")
 	fmt.Println("8. KELUAR")
-	fmt.Println()
+	fmt.Println("                                              🐈")
 	fmt.Print("Pilihan: ")
 }
 

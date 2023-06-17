@@ -137,6 +137,15 @@ func carListInterface(C arrCars, n int) {
 	fmt.Println("Pilih: 1. Edit | 2. Hapus | 3. Kembali ke menu utama")
 }
 
+func isFoundCar(C arrCars, n, id int) bool {
+	for i := 0; i < n; i++ {
+		if id == C[i].id {
+			return true
+		}
+	}
+	return false
+}
+
 // EDIT CAR INTERFACE
 func editCarInterface(C *arrCars, n int) {
 	var opt11, idx int
@@ -157,8 +166,9 @@ func editCarInterface(C *arrCars, n int) {
 		if editCarData.id == 0 {
 			return
 		}
-		for editCarData.id < 0 || editCarData.id > n {
-			fmt.Println("ID mobil tidak valid. Silakan coba lagi.")
+
+		for (editCarData.id < 0 || editCarData.id > n) || !isFoundCar(*C, n, editCarData.id) {
+			fmt.Println("ID mobil tidak valid/telah dihapus. Silakan coba lagi.")
 			fmt.Print("ID Mobil: ")
 			fmt.Scanln(&editCarData.id)
 		}
