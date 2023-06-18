@@ -247,13 +247,13 @@ func deleteCarInterface(C *arrCars, n *int) {
 		fmt.Println()
 		fmt.Println("Silakan masukkan ID mobil yang ingin dihapus:")
 		fmt.Println()
-		fmt.Printf("ID yang tersedia: %d - %d | 0 (keluar)\n", C[0].id, *n)
+		fmt.Printf("ID yang tersedia: %d - %d | 0 (keluar)\n", C[0].id, C[*n-1].id)
 		fmt.Print("ID Mobil: ")
 		fmt.Scan(&idx)
 		if idx == 0 {
 			return
 		}
-		for idx < 0 || idx > *n {
+		for idx < 0 || idx > C[*n-1].id {
 			fmt.Println("ID mobil tidak valid. Silakan coba lagi.")
 			fmt.Print("ID Mobil: ")
 			fmt.Scan(&idx)
