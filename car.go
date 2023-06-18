@@ -160,14 +160,14 @@ func editCarInterface(C *arrCars, n int) {
 		fmt.Println()
 		fmt.Println("Silakan masukkan detail mobil yang ingin diedit:")
 		fmt.Println()
-		fmt.Printf("ID yang tersedia: %d - %d | 0 (keluar)\n", C[0].id, n)
+		fmt.Printf("ID yang tersedia: %d - %d | 0 (keluar)\n", C[0].id, C[n-1].id)
 		fmt.Print("ID Mobil: ")
 		fmt.Scanln(&editCarData.id)
 		if editCarData.id == 0 {
 			return
 		}
 
-		for (editCarData.id < 0 || editCarData.id > n) || !isFoundCar(*C, n, editCarData.id) {
+		for (editCarData.id < 0 || editCarData.id > C[n-1].id) || !isFoundCar(*C, n, editCarData.id) {
 			fmt.Println("ID mobil tidak valid/telah dihapus. Silakan coba lagi.")
 			fmt.Print("ID Mobil: ")
 			fmt.Scanln(&editCarData.id)
