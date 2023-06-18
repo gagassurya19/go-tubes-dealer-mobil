@@ -29,7 +29,7 @@ func addNewCar(C *arrCars, n *int) {
 		fmt.Println("         TAMBAH MOBIL BARU (SATU MOBIL)")
 		fmt.Println("-------------------------------------------------")
 		fmt.Println()
-		in.id = *n + 1 // add id (auto increment)
+		in.id = C[*n-1].id + 1 // add id (auto increment)
 		fmt.Print("Masukan merk: ")
 		fmt.Scanln(&in.brand)
 		fmt.Print("Masukan model: ")
