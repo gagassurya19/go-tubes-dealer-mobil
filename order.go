@@ -39,7 +39,7 @@ func placeOrder(O *arrOrders, n *int, cars *arrCars, n_car int, customers arrCus
 				return
 			}
 
-			if id_car < 0 || id_car >= n_car {
+			if id_car < 0 || id_car > cars[n_car-1].id {
 				message = "ID Mobil tidak valid. Silakan coba lagi."
 				continue
 			}
