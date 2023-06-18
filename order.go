@@ -26,7 +26,7 @@ func placeOrder(O *arrOrders, n *int, cars *arrCars, n_car int, customers arrCus
 		fmt.Println()
 
 		if !foundCar {
-			fmt.Printf("ID Mobil (1 - %d) | ` (exit): ", n_car-1)
+			fmt.Printf("ID Mobil (%d - %d) | ` (exit): ", cars[0].id, cars[n_car-1].id)
 			fmt.Scanln(&id_car_input)
 
 			if id_car_input == "`" {
